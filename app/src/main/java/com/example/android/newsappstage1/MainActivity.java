@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         String minNews = sharedPrefs.getString(getString(R.string.settings_min_news_key), getString(R.string.settings_min_news_default));
 
+        String orderBy  = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("api-key", "test");
         uriBuilder.appendQueryParameter("page-size", minNews);
 
-//        uriBuilder.appendQueryParameter("orderBy", orderBy);
+       uriBuilder.appendQueryParameter("orderBy", orderBy);
         return new NewsLoader(this, uriBuilder.toString());
     }
 
