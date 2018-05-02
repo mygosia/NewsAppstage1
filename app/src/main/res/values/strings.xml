@@ -2,4 +2,11 @@
     <string name="app_name">NewsApp stage 1</string>
     <string name="no_news">No news found.</string>
     <string name="no_internet_connection">No internet connection.</string>
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">NewsApp Settings</string>
+
+    <string name="settings_min_news_label">How Many News</string>
+    <string name="settings_min_news_key" translatable="false">min_news</string>
+    <string name="settings_min_news_default" translatable="false">3</string>
 </resources>
