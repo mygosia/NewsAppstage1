@@ -28,19 +28,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     //  URL for news data from Guardian URL
     private static final String GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search?";
-//            "http://content.guardianapis.com/search?q=health&api-key=test";
 
     //   Constant value for the news loader ID.
     private static final int NEWS_LOADER_ID = 1;
 
-    /**
-     * Adapter for the list of news
-     */
+    // Adapter for the list of news
     private NewsAdapter mAdapter;
 
-    /**
-     * TextView that is displayed when the list is empty
-     */
+    //TextView that is displayed when the list is empty
     private TextView mEmptyStateTextView;
 
     @Override
@@ -89,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (isConnected) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
-            Log.v(LOG_TAG, "Init Loader");
         } else {
             View loadingIndicator = findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
@@ -99,15 +93,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-//        Log.v(LOG_TAG, "on Create Loader");
-//        // Create a new loader for the given URL
-//        return new NewsLoader(this, GUARDIAN_REQUEST_URL);
-
+       // Create a new loader for the given URL
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String minNews = sharedPrefs.getString(getString(R.string.settings_min_news_key), getString(R.string.settings_min_news_default));
 
-        String orderBy  = sharedPrefs.getString(
+        String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default)
         );
@@ -119,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("api-key", "test");
         uriBuilder.appendQueryParameter("page-size", minNews);
 
-       uriBuilder.appendQueryParameter("orderBy", orderBy);
+        uriBuilder.appendQueryParameter("orderBy", orderBy);
         return new NewsLoader(this, uriBuilder.toString());
     }
 
@@ -130,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         loadingIndicator.setVisibility(View.GONE);
 
         mEmptyStateTextView.setText(R.string.no_news);
-        Log.v(LOG_TAG, "onLoadFinished");
         // Clear the adapter of previous news data
         mAdapter.clear();
 
@@ -145,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<List<News>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
-        Log.v(LOG_TAG, "onLoaderReset");
     }
 
     @Override
@@ -166,6 +155,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

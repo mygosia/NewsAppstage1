@@ -7,9 +7,12 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = SettingsActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
